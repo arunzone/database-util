@@ -1,13 +1,12 @@
 package me.arun;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
-import org.hamcrest.core.Is;
+import org.hamcrest.core.IsCollectionContaining;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.List;
+
+import static org.junit.Assert.assertThat;
 
 public class FileReaderTest
 {
@@ -15,8 +14,8 @@ public class FileReaderTest
     public void shouldReadFileContent() throws IOException {
 
         FileReader fileReader =  new FileReader();
-        String content = fileReader.read("./src/test/resources/test.sql");
+        List<String> content = fileReader.readDirectory("./src/test/resources/");
 
-        assertThat(content, is( "select * from table;"));
+        assertThat(content, IsCollectionContaining.hasItem( "select * from table;"));
     }
 }
