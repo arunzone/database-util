@@ -1,5 +1,6 @@
 package me.arun;
 
+import me.arun.database.Database;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
@@ -24,6 +25,6 @@ public class QueryRunnerTest {
         List<Map<String, Object>> result = Collections.singletonList(new HashMap<>());
         when(database.executeQuery("select * from userx")).thenReturn(result);
 
-        MatcherAssert.assertThat(queryRunner.runQueries(), hasItem(result));
+        MatcherAssert.assertThat(queryRunner.runQueriesFrom("."), hasItem(result));
     }
 }

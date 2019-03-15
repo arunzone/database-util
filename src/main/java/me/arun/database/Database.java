@@ -1,4 +1,4 @@
-package me.arun;
+package me.arun.database;
 
 import me.arun.exception.DatabaseException;
 
@@ -17,18 +17,23 @@ public class Database {
     private DriverType driverType;
     private Connection connection;
 
-    public Database(DriverType driverType) throws SQLException, ClassNotFoundException {
+    public Database(DriverType driverType) {
         this.driverType = driverType;
-        this.connection = establishConnection();
+        establishConnection();
     }
 
     public Connection connection() {
         return connection;
     }
 
-    private Connection establishConnection() throws SQLException, ClassNotFoundException {
-        Class.forName(driverType.getDriverName());
-        return DriverManager.getConnection(driverType.getDriverUrl(), "aconexsql", "aconexsql");
+    private void establishConnection() {
+        try {
+            Class.forName(driverType.getDriverName());
+            connection = DriverManager.getConnection(driverType.getDriverUrl(), "aconexsql", "aconexsql");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DatabaseException();
+        }
     }
 
 

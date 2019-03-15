@@ -1,10 +1,9 @@
 package me.arun;
 
-import org.hamcrest.core.Is;
+import me.arun.database.Database;
+import me.arun.database.DriverType;
 import org.junit.Test;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -15,14 +14,7 @@ import static org.junit.Assert.assertThat;
 
 public class DatabaseTest {
     @Test
-    public void shouldReturnDatabaseConnection() throws SQLException, ClassNotFoundException {
-        Database database = new Database(DriverType.JTDS);
-
-        assertThat(database.connection(), Is.isA(Connection.class));
-    }
-
-    @Test
-    public void shouldExecuteQueryUsingJtds() throws SQLException, ClassNotFoundException {
+    public void shouldExecuteQueryUsingJtds() {
         Database database = new Database(DriverType.JTDS);
 
         List<Map<String, Object>> result = database.executeQuery("select * from userx");
@@ -31,7 +23,7 @@ public class DatabaseTest {
     }
 
     @Test
-    public void shouldExecuteQueryUsingMSSql() throws SQLException, ClassNotFoundException {
+    public void shouldExecuteQueryUsingMSSql() {
         Database database = new Database(DriverType.MSSQ);
 
         List<Map<String, Object>> result = database.executeQuery("select * from userx");

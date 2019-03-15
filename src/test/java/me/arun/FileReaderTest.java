@@ -8,14 +8,13 @@ import java.util.List;
 
 import static org.junit.Assert.assertThat;
 
-public class FileReaderTest
-{
+public class FileReaderTest {
     @Test
     public void shouldReadFileContent() throws IOException {
 
-        FileReader fileReader =  new FileReader();
+        FileReader fileReader = new FileReader();
         List<String> content = fileReader.readDirectory("./src/test/resources/");
 
-        assertThat(content, IsCollectionContaining.hasItem( "select * from table;"));
+        assertThat(content, IsCollectionContaining.hasItem("select * from userx;"));
     }
 }

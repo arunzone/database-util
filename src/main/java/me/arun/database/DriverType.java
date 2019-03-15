@@ -1,4 +1,4 @@
-package me.arun;
+package me.arun.database;
 
 public enum DriverType {
     JTDS("net.sourceforge.jtds.jdbc.Driver", "jdbc:jtds:sqlserver://localhost/babylon"),
