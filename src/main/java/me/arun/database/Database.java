@@ -32,7 +32,7 @@ public class Database {
             connection = DriverManager.getConnection(driverType.getDriverUrl(), "aconexsql", "aconexsql");
         } catch (Exception e) {
             e.printStackTrace();
-            throw new DatabaseException();
+            throw new DatabaseException(e);
         }
     }
 
@@ -44,7 +44,7 @@ public class Database {
             result = resultSetToList(statement.executeQuery(query));
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DatabaseException();
+            throw new DatabaseException(e);
         }
         return result;
     }
