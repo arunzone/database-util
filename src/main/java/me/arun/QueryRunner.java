@@ -19,7 +19,8 @@ public class QueryRunner {
     }
 
     public static void main(String[] args) throws IOException {
-        List<List<Map<String, Object>>> result = new QueryRunner(new FileReader(), new Database(DriverType.JTDS)).runQueriesFrom("./src/test/resources/");
+        String filePath = args.length > 1 ? args[1] : ".";
+        List<List<Map<String, Object>>> result = new QueryRunner(new FileReader(), new Database(DriverType.valueOf(args[0]))).runQueriesFrom(filePath);
         result.forEach(System.out::println);
     }
 
