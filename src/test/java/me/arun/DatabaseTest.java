@@ -1,9 +1,6 @@
 package me.arun;
 
-import org.hamcrest.collection.IsEmptyCollection;
 import org.hamcrest.core.Is;
-import org.hamcrest.core.IsCollectionContaining;
-import org.hamcrest.core.IsNot;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -25,8 +22,17 @@ public class DatabaseTest {
     }
 
     @Test
-    public void shouldExecuteQuery() throws SQLException, ClassNotFoundException {
-        Database database =  new Database(DriverType.JTDS);
+    public void shouldExecuteQueryUsingJtds() throws SQLException, ClassNotFoundException {
+        Database database = new Database(DriverType.JTDS);
+
+        List<Map<String, Object>> result = database.executeQuery("select * from userx");
+
+        assertThat(result, is(not(empty())));
+    }
+
+    @Test
+    public void shouldExecuteQueryUsingMSSql() throws SQLException, ClassNotFoundException {
+        Database database = new Database(DriverType.MSSQ);
 
         List<Map<String, Object>> result = database.executeQuery("select * from userx");
 
